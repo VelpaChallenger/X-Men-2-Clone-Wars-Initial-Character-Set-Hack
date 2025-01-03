@@ -1,0 +1,33 @@
+PSYLOCKE_BYTE: equ $10
+BEAST_BYTE: equ $11
+NIGHTCRAWLER_BYTE: equ $13
+WOLVERINE_BYTE: equ $14
+GAMBIT_BYTE: equ $17
+CYCLOPS_BYTE: equ $B2
+
+	ORG 0
+	incbin "clone_wars.md"
+	IF __CHARACTER__=0
+	CHARACTER_BYTE: equ PSYLOCKE_BYTE
+	ELSEIF __CHARACTER__=1
+	CHARACTER_BYTE: equ BEAST_BYTE
+	ELSEIF __CHARACTER__=2
+	CHARACTER_BYTE: equ NIGHTCRAWLER_BYTE
+	ELSEIF __CHARACTER__=3
+	CHARACTER_BYTE: equ WOLVERINE_BYTE
+	ELSEIF __CHARACTER__=4
+	CHARACTER_BYTE: equ GAMBIT_BYTE
+	ELSEIF __CHARACTER__=5
+	CHARACTER_BYTE: equ CYCLOPS_BYTE
+	ENDC
+	
+	
+	ORG $FD62E
+	move.b #CHARACTER_BYTE, D7
+	nop
+	ORG $FD636
+	move.b #CHARACTER_BYTE, D0
+	nop
+	ORG $FD646
+	moveq #0, D0 ; This translates to $C470 in game without patches, it usually has 0, but can have 1 if you press Start after demo mode plays.
+	nop

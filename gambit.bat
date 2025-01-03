@@ -1,0 +1,1 @@
+asm68k /p /e __CHARACTER__=4 xmen2_clone_wars.asm, clone_wars_patched.md
